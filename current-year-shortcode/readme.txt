@@ -3,7 +3,7 @@ Contributors: kgmservizi
 Donate link: https://kgmservizi.com
 Tags: year, current year, shortcode, current year shortcode, copyright, copyright shortcode, trademark, copyright symbol, trademark shortcode, trademark symbol, symbol shortcode
 Requires at least: 2.5
-Tested up to: 6.6
+Tested up to: 6.7
 Requires PHP: 5.6
 Stable tag: 2.3.5
 License: GPLv2 or later
