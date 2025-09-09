@@ -3,9 +3,9 @@ Contributors: kgmservizi
 Donate link: https://kgmservizi.com
 Tags: year, current year, shortcode, current year shortcode, copyright, copyright shortcode, trademark, copyright symbol, trademark shortcode, trademark symbol, symbol shortcode
 Requires at least: 2.5
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.3.5
+Stable tag: 2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -140,7 +140,7 @@ For shortcode with day you can choose format with attribute format="". It suppor
 For day shortcode [d] you can add offset with attribute offset="". It support + or -.
 For month shortcode [m] you can add offset with attribute offset="". It support + or -.
 For year shortcode [y] you can add offset with attribute offset="". It support + or -.
-For current date shortcode [dmy] you can add offset with attribute offset="". It support + or - in standard php date format, for ex. + 1 year or - 1 day.
+For current date shortcode [dmy] you can add offset with attribute offset="". It support + or - in standard php date format, for ex. +1year or -1day.
 
 **Example**
 [d offset="+1"] **2023**
@@ -159,6 +159,9 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 
 == Changelog ==
+
+= 2.4 =
+* Complete code revision.
 
 = 2.3.5 =
 * 6.6 compatibility.
@@ -249,6 +252,9 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 
 == Upgrade Notice ==
+
+= 2.4 =
+Complete code revision.
 
 = 2.3.5 =
 6.6 compatibility.

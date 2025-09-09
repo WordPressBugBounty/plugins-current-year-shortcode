@@ -19,7 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 add_shortcode( 't', 'cys_registered_trademark' );
 function cys_registered_trademark( $atts ){
-  return '®';
+  return esc_html('®');
 }
 
 /**
@@ -29,7 +29,7 @@ function cys_registered_trademark( $atts ){
  */
 add_shortcode( 'tm', 'cys_trademark' );
 function cys_trademark( $atts ){
-  return '™';
+  return esc_html('™');
 }
 
 /**
@@ -39,5 +39,5 @@ function cys_trademark( $atts ){
  */
 add_shortcode( 'sm', 'cys_servicemark_trademark' );
 function cys_servicemark_trademark( $atts ){
-  return '℠';
+  return esc_html('℠');
 }

@@ -14,17 +14,56 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * 
- * Retrieve user IP
+ * Retrieve user IP with security validation
  * 
  */
 add_shortcode('show_user_ip', 'cys_retrieve_ip');
 function cys_retrieve_ip() {
-    if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
-        $ip = $_SERVER['HTTP_CLIENT_IP'];
-    } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
-        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-    } else {
-        $ip = $_SERVER['REMOTE_ADDR'];
+    $ip = '';
+    
+    // List of proxy headers to check (in priority order)
+    $proxy_headers = array(
+        'HTTP_CF_CONNECTING_IP',     // Cloudflare
+        'HTTP_CLIENT_IP',            // Proxy
+        'HTTP_X_FORWARDED_FOR',      // Load balancer/proxy
+        'HTTP_X_FORWARDED',          // Proxy
+        'HTTP_X_CLUSTER_CLIENT_IP',  // Cluster
+        'HTTP_FORWARDED_FOR',        // Proxy
+        'HTTP_FORWARDED',            // Proxy
+        'REMOTE_ADDR'                // Standard
+    );
+    
+    // Find the first valid IP address
+    foreach ($proxy_headers as $header) {
+        if (!empty($_SERVER[$header])) {
+            $candidate_ip = $_SERVER[$header];
+            
+            // If multiple IPs (comma separated), take the first one
+            if (strpos($candidate_ip, ',') !== false) {
+                $candidate_ip = trim(explode(',', $candidate_ip)[0]);
+            }
+            
+            // Validate the IP address
+            if (filter_var($candidate_ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                $ip = $candidate_ip;
+                break;
+            }
+        }
     }
-    return apply_filters('wpb_get_ip', $ip);
+    
+    // Fallback to REMOTE_ADDR if no valid IP found
+    if (empty($ip) && !empty($_SERVER['REMOTE_ADDR'])) {
+        $fallback_ip = $_SERVER['REMOTE_ADDR'];
+        if (filter_var($fallback_ip, FILTER_VALIDATE_IP)) {
+            $ip = $fallback_ip;
+        }
+    }
+    
+    // Default safe value if no valid IP found
+    if (empty($ip)) {
+        $ip = '0.0.0.0';
+    }
+    
+    // Escape output for security and apply filters
+    return apply_filters('wpb_get_ip', esc_html($ip));
 }
