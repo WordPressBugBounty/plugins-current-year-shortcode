@@ -13,9 +13,16 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Retrieve user IP address with security validation and sanitization
  * 
- * Retrieve user IP with security validation
+ * Checks multiple proxy headers in priority order and validates IP addresses.
+ * Falls back to REMOTE_ADDR if no valid IP is found in proxy headers.
+ * Returns '0.0.0.0' as a safe default if no valid IP is found.
  * 
+ * Note: Displaying user IP addresses may have GDPR implications.
+ * Site administrators should ensure proper privacy policy disclosure.
+ * 
+ * @return string The user's IP address, escaped for safe output
  */
 add_shortcode('show_user_ip', 'cys_retrieve_ip');
 function cys_retrieve_ip() {
@@ -36,7 +43,8 @@ function cys_retrieve_ip() {
     // Find the first valid IP address
     foreach ($proxy_headers as $header) {
         if (!empty($_SERVER[$header])) {
-            $candidate_ip = $_SERVER[$header];
+            // Unslash and sanitize the IP address from $_SERVER
+            $candidate_ip = sanitize_text_field(wp_unslash($_SERVER[$header]));
             
             // If multiple IPs (comma separated), take the first one
             if (strpos($candidate_ip, ',') !== false) {
@@ -53,7 +61,8 @@ function cys_retrieve_ip() {
     
     // Fallback to REMOTE_ADDR if no valid IP found
     if (empty($ip) && !empty($_SERVER['REMOTE_ADDR'])) {
-        $fallback_ip = $_SERVER['REMOTE_ADDR'];
+        // Unslash and sanitize the IP address from $_SERVER
+        $fallback_ip = sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR']));
         if (filter_var($fallback_ip, FILTER_VALIDATE_IP)) {
             $ip = $fallback_ip;
         }

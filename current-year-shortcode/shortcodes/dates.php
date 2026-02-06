@@ -136,11 +136,12 @@ function cys_sanitize_date_atts($atts) {
 }
 
 /**
+ * Retrieve current year with optional format and offset
  * 
- * Retrieve year
- * 
- * @param $atts - format (y - Y) and offset (+1 -1 etc.)
- * 
+ * @param array $atts Shortcode attributes
+ *   - format (string) Optional. Year format (y or Y). Default: 'error' (uses default format)
+ *   - offset (string) Optional. Year offset (+1, -1, etc.). Default: 'none'
+ * @return string The formatted year or error message
  */
 add_shortcode( 'y', 'cys_year' );
 function cys_year( $atts ){
@@ -153,35 +154,36 @@ function cys_year( $atts ){
     // Validate offset parameter
     $validated_offset = cys_validate_offset($atts['offset'], 'years');
     if ($validated_offset === false) {
-        return 'Invalid offset value!';
+        return esc_html('Invalid offset value!');
     }
     
     if ($atts['format'] != 'error') {
         $validated_format = cys_validate_date_format($atts['format'], 'year');
         if ($validated_format !== false) {
           if ($validated_offset != 'none') {
-            return date_i18n($validated_format, strtotime('+' . $validated_offset . ' years'));
+            return esc_html(date_i18n($validated_format, strtotime('+' . $validated_offset . ' years')));
           } else {
-            return date_i18n($validated_format);
+            return esc_html(date_i18n($validated_format));
           }
         } else {
-          return esc_html($atts['format']) . ' is not a valid year format!';
+          return esc_html($atts['format'] . ' is not a valid year format!');
         }
     } else {
       if ($validated_offset != 'none') {
-        return date_i18n("Y", strtotime('+' . $validated_offset . ' years'));
+        return esc_html(date_i18n("Y", strtotime('+' . $validated_offset . ' years')));
       } else {
-        return date_i18n("Y");
+        return esc_html(date_i18n("Y"));
       }
     }
 }
 
 /**
+ * Retrieve current month with optional format and offset
  * 
- * Retrieve month
- * 
- * @param $atts - format (F - m - M - n) and offset (+1 -1 etc.)
- * 
+ * @param array $atts Shortcode attributes
+ *   - format (string) Optional. Month format (F, m, M, n). Default: 'error' (uses default format)
+ *   - offset (string) Optional. Month offset (+1, -1, etc.). Default: 'none'
+ * @return string The formatted month or error message
  */
 add_shortcode( 'm', 'cys_month' );
 function cys_month( $atts ){
@@ -194,35 +196,36 @@ function cys_month( $atts ){
     // Validate offset parameter
     $validated_offset = cys_validate_offset($atts['offset'], 'months');
     if ($validated_offset === false) {
-        return 'Invalid offset value!';
+        return esc_html('Invalid offset value!');
     }
     
     if ($atts['format'] != 'error') {
         $validated_format = cys_validate_date_format($atts['format'], 'month');
         if ($validated_format !== false) {
           if ($validated_offset != 'none') {
-            return date_i18n($validated_format, strtotime('+' . $validated_offset . ' months'));
+            return esc_html(date_i18n($validated_format, strtotime('+' . $validated_offset . ' months')));
           } else {
-            return date_i18n($validated_format);
+            return esc_html(date_i18n($validated_format));
           }
         } else {
-          return esc_html($atts['format']) . ' is not a valid month format!';
+          return esc_html($atts['format'] . ' is not a valid month format!');
         }
     } else {
       if ($validated_offset != 'none') {
-        return date_i18n("F", strtotime('+' . $validated_offset . ' months'));
+        return esc_html(date_i18n("F", strtotime('+' . $validated_offset . ' months')));
       } else {
-        return date_i18n("F");
+        return esc_html(date_i18n("F"));
       }
     }
 }
 
 /**
+ * Retrieve current day with optional format and offset
  * 
- * Retrieve day
- * 
- * @param $atts - format (d - D - j - N - S - w - z - t) and offset (+1 -1 etc.)
- * 
+ * @param array $atts Shortcode attributes
+ *   - format (string) Optional. Day format (d, D, j, N, S, w, z, t). Default: 'error' (uses default format)
+ *   - offset (string) Optional. Day offset (+1, -1, etc.). Default: 'none'
+ * @return string The formatted day or error message
  */
 add_shortcode( 'd', 'cys_day' );
 function cys_day( $atts ){
@@ -235,35 +238,36 @@ function cys_day( $atts ){
     // Validate offset parameter
     $validated_offset = cys_validate_offset($atts['offset'], 'days');
     if ($validated_offset === false) {
-        return 'Invalid offset value!';
+        return esc_html('Invalid offset value!');
     }
     
     if ($atts['format'] != 'error') {
         $validated_format = cys_validate_date_format($atts['format'], 'day');
         if ($validated_format !== false) {
           if ($validated_offset != 'none') {
-            return date_i18n($validated_format, strtotime('+' . $validated_offset . ' days'));
+            return esc_html(date_i18n($validated_format, strtotime('+' . $validated_offset . ' days')));
           } else {
-            return date_i18n($validated_format);
+            return esc_html(date_i18n($validated_format));
           }
         } else {
-          return esc_html($atts['format']) . ' is not a valid day format!';
+          return esc_html($atts['format'] . ' is not a valid day format!');
         }
     } else {
       if ($validated_offset != 'none') {
-        return date_i18n("d", strtotime('+' . $validated_offset . ' days'));
+        return esc_html(date_i18n("d", strtotime('+' . $validated_offset . ' days')));
       } else {
-        return date_i18n("d");
+        return esc_html(date_i18n("d"));
       }
     }
 }
 
 /**
+ * Retrieve current date with optional format and offset
  * 
- * Retrieve current date
- * 
- * @param $atts - format (all PHP valid format) and offset (+1 -1 etc.)
- * 
+ * @param array $atts Shortcode attributes
+ *   - format (string) Optional. Date format (all PHP date format characters). Default: 'error' (uses d/m/Y)
+ *   - offset (string) Optional. Date offset (+1 year, +5 months, today, yesterday, tomorrow, etc.). Default: 'none'
+ * @return string The formatted date or error message
  */
 add_shortcode( 'dmy', 'cys_current_date' );
 function cys_current_date( $atts ){
@@ -279,25 +283,25 @@ function cys_current_date( $atts ){
   // Validate offset parameter for generic strtotime
   $validated_offset = cys_validate_offset($atts['offset'], 'generic');
   if ($validated_offset === false) {
-      return 'Invalid offset value!';
+      return esc_html('Invalid offset value!');
   }
   
   if ($atts['format'] != 'error') {
       $validated_format = cys_validate_date_format($atts['format'], 'date');
       if ($validated_format !== false) {
         if ($validated_offset != 'none') {
-          return date_i18n($validated_format, strtotime($validated_offset));
+          return esc_html(date_i18n($validated_format, strtotime($validated_offset)));
         } else {
-          return date_i18n($validated_format);
+          return esc_html(date_i18n($validated_format));
         }
       } else {
-        return esc_html($atts['format']) . ' is not a valid date format!';
+        return esc_html($atts['format'] . ' is not a valid date format!');
       }
   } else {
     if ($validated_offset != 'none') {
-      return date_i18n("d/m/Y", strtotime($validated_offset));
+      return esc_html(date_i18n("d/m/Y", strtotime($validated_offset)));
     } else {
-      return date_i18n("d/m/Y");
+      return esc_html(date_i18n("d/m/Y"));
     }
   }
 }

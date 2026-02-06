@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Current Year, Symbols and IP Shortcode
- * Version: 2.4
+ * Version: 2.4.1
  * Description: Get current year, symbols and IP with shortcode.
  * Author: KGM Servizi
  * Author URI: https://kgmservizi.com

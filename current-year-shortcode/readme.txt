@@ -1,11 +1,11 @@
 === Current Year, Symbols and IP Shortcode ===
 Contributors: kgmservizi
 Donate link: https://kgmservizi.com
-Tags: year, current year, shortcode, current year shortcode, copyright, copyright shortcode, trademark, copyright symbol, trademark shortcode, trademark symbol, symbol shortcode
+Tags: current year shortcode, copyright shortcode, copyright symbol, trademark shortcode, symbol shortcode
 Requires at least: 2.5
 Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.4
+Stable tag: 2.4.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -160,6 +160,9 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 == Changelog ==
 
+= 2.4.1 =
+* Bugfix.
+
 = 2.4 =
 * Complete code revision.
 
@@ -252,6 +255,9 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 
 == Upgrade Notice ==
+
+= 2.4.1 =
+Bugfix.
 
 = 2.4 =
 Complete code revision.

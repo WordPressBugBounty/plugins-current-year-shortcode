@@ -91,32 +91,11 @@ function cys_validate_year($year) {
 }
 
 /**
- * Sanitize shortcode attributes
+ * Retrieve copyright symbol with current year
  * 
- * @param array $atts The attributes to sanitize
- * @return array Sanitized attributes
- */
-function cys_sanitize_shortcode_atts($atts) {
-    $sanitized = array();
-    
-    foreach ($atts as $key => $value) {
-        // Sanitize text fields
-        if (in_array($key, array('year', 'format'))) {
-            $sanitized[$key] = sanitize_text_field($value);
-        } else {
-            $sanitized[$key] = $value;
-        }
-    }
-    
-    return $sanitized;
-}
-
-/**
- * 
- * Retrieve ©year
- * 
- * @param $atts - format (y - Y)
- * 
+ * @param array $atts Shortcode attributes
+ *   - format (string) Optional. Year format (y or Y). Default: 'error' (uses default format Y)
+ * @return string The copyright symbol with formatted year or error message
  */
 add_shortcode( 'cy', 'csy_copy_year' );
 function csy_copy_year( $atts ) {
@@ -127,21 +106,22 @@ function csy_copy_year( $atts ) {
     if ($atts['format'] != 'error') {
         $validated_format = cys_validate_year_format($atts['format']);
         if ($validated_format !== false) {
-          return '©' . date_i18n($validated_format);
+          return esc_html('©' . date_i18n($validated_format));
         } else {
-          return esc_html($atts['format']) . ' is not a valid year format!';
+          return esc_html($atts['format'] . ' is not a valid year format!');
         }
     } else {
-      return '©' . date_i18n("Y"); 
+      return esc_html('©' . date_i18n("Y")); 
     }
 }
 
 /**
+ * Retrieve copyright symbol with year range (first-year - last-year)
  * 
- * Retrieve ©first-year - last-year
- * 
- * @param $atts - format (y - Y) and offset (+1 -1 etc.)
- * 
+ * @param array $atts Shortcode attributes
+ *   - year (string) Required. The first year of copyright (1-9999, supports 2-digit years)
+ *   - format (string) Optional. Year format (y or Y). Default: 'error' (uses default format Y)
+ * @return string The copyright symbol with year range or error message
  */
 add_shortcode( 'cyy', 'csy_copy_year_year' );
 function csy_copy_year_year( $atts ) {
@@ -154,7 +134,7 @@ function csy_copy_year_year( $atts ) {
     // Validate year parameter
     $validated_year = cys_validate_year($atts['year']);
     if ($validated_year === false) {
-        return 'Invalid year value!';
+        return esc_html('Invalid year value!');
     }
     
     $year_display = $validated_year['display'];  // Original format for display
@@ -164,28 +144,29 @@ function csy_copy_year_year( $atts ) {
         $validated_format = cys_validate_year_format($atts['format']);
         if ($validated_format !== false) {
             if (date_i18n($validated_format) == $year_numeric) {
-               return '©' . date_i18n($validated_format);
+               return esc_html('©' . date_i18n($validated_format));
             } else {
-               return '©' . esc_html($year_display) . '-' . date_i18n($validated_format);
+               return esc_html('©' . $year_display . '-' . date_i18n($validated_format));
             }
         } else {
-          return esc_html($atts['format']) . ' is not a valid year format!';
+          return esc_html($atts['format'] . ' is not a valid year format!');
         }
     } else {
         if (date_i18n("Y") == $year_numeric) {
-           return '©' . date_i18n("Y");
+           return esc_html('©' . date_i18n("Y"));
         } else {
-           return '©' . esc_html($year_display) . '-' . date_i18n("Y");
+           return esc_html('©' . $year_display . '-' . date_i18n("Y"));
         }
     }
 }
 
 /**
+ * Retrieve "Copyright" text with year range (first-year - last-year)
  * 
- * Retrieve Copyright first-year - last-year
- * 
- * @param $atts - format (y - Y) and offset (+1 -1 etc.)
- * 
+ * @param array $atts Shortcode attributes
+ *   - year (string) Required. The first year of copyright (1-9999, supports 2-digit years)
+ *   - format (string) Optional. Year format (y or Y). Default: 'error' (uses default format Y)
+ * @return string The "Copyright" text with year range or error message
  */
 add_shortcode( 'cyyl', 'csy_copy_year_year_long' );
 function csy_copy_year_year_long( $atts ) {
@@ -198,7 +179,7 @@ function csy_copy_year_year_long( $atts ) {
     // Validate year parameter
     $validated_year = cys_validate_year($atts['year']);
     if ($validated_year === false) {
-        return 'Invalid year value!';
+        return esc_html('Invalid year value!');
     }
     
     $year_display = $validated_year['display'];  // Original format for display
@@ -208,28 +189,29 @@ function csy_copy_year_year_long( $atts ) {
         $validated_format = cys_validate_year_format($atts['format']);
         if ($validated_format !== false) {
             if (date_i18n($validated_format) == $year_numeric) {
-               return 'Copyright ' . date_i18n($validated_format);
+               return esc_html('Copyright ' . date_i18n($validated_format));
             } else {
-               return 'Copyright ' . esc_html($year_display) . '-' . date_i18n($validated_format);
+               return esc_html('Copyright ' . $year_display . '-' . date_i18n($validated_format));
             }
         } else {
-          return esc_html($atts['format']) . ' is not a valid year format!';
+          return esc_html($atts['format'] . ' is not a valid year format!');
         }
     } else {
         if (date_i18n("Y") == $year_numeric) {
-           return 'Copyright ' . date_i18n("Y");
+           return esc_html('Copyright ' . date_i18n("Y"));
         } else {
-           return 'Copyright ' . esc_html($year_display) . '-' . date_i18n("Y");
+           return esc_html('Copyright ' . $year_display . '-' . date_i18n("Y"));
         }
     }
 }
 
 /**
+ * Retrieve copyright symbol with "Copyright" text and year range (first-year - last-year)
  * 
- * Retrieve ©Copyright first-year - last-year
- * 
- * @param $atts - format (y - Y) and offset (+1 -1 etc.)
- * 
+ * @param array $atts Shortcode attributes
+ *   - year (string) Required. The first year of copyright (1-9999, supports 2-digit years)
+ *   - format (string) Optional. Year format (y or Y). Default: 'error' (uses default format Y)
+ * @return string The copyright symbol with "Copyright" text and year range or error message
  */
 add_shortcode( 'cyyls', 'csy_copy_year_year_long_symbol' );
 function csy_copy_year_year_long_symbol( $atts ) {
@@ -242,7 +224,7 @@ function csy_copy_year_year_long_symbol( $atts ) {
     // Validate year parameter
     $validated_year = cys_validate_year($atts['year']);
     if ($validated_year === false) {
-        return 'Invalid year value!';
+        return esc_html('Invalid year value!');
     }
     
     $year_display = $validated_year['display'];  // Original format for display
@@ -252,38 +234,40 @@ function csy_copy_year_year_long_symbol( $atts ) {
         $validated_format = cys_validate_year_format($atts['format']);
         if ($validated_format !== false) {
             if (date_i18n($validated_format) == $year_numeric) {
-               return '©Copyright ' . date_i18n($validated_format);
+               return esc_html('©Copyright ' . date_i18n($validated_format));
             } else {
-               return '©Copyright ' . esc_html($year_display) . '-' . date_i18n($validated_format);
+               return esc_html('©Copyright ' . $year_display . '-' . date_i18n($validated_format));
             }
         } else {
-          return esc_html($atts['format']) . ' is not a valid year format!';
+          return esc_html($atts['format'] . ' is not a valid year format!');
         }
     } else {
         if (date_i18n("Y") == $year_numeric) {
-           return '©Copyright ' . date_i18n("Y");
+           return esc_html('©Copyright ' . date_i18n("Y"));
         } else {
-           return '©Copyright ' . esc_html($year_display) . '-' . date_i18n("Y");
+           return esc_html('©Copyright ' . $year_display . '-' . date_i18n("Y"));
         }
     }
 }
 
 /**
+ * Retrieve copyright symbol (©)
  * 
- * Retrieve © symbol
- * 
+ * @param array $atts Shortcode attributes (not used)
+ * @return string The copyright symbol, escaped for safe output
  */
 add_shortcode( 'c', 'cys_copy' );
 function cys_copy( $atts ){
-  return '©';
+  return esc_html('©');
 }
 
 /**
+ * Retrieve "Copyright" text
  * 
- * Retrieve Copyright text
- * 
+ * @param array $atts Shortcode attributes (not used)
+ * @return string The "Copyright" text, escaped for safe output
  */
 add_shortcode( 'cc', 'cys_copylong' );
 function cys_copylong( $atts ){
-  return 'Copyright';
+  return esc_html('Copyright');
 }

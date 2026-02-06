@@ -13,9 +13,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
+ * Retrieve registered trademark symbol (®)
  * 
- * Retrieve ® symbol
- * 
+ * @param array $atts Shortcode attributes (not used)
+ * @return string The registered trademark symbol, escaped for safe output
  */
 add_shortcode( 't', 'cys_registered_trademark' );
 function cys_registered_trademark( $atts ){
@@ -23,9 +24,10 @@ function cys_registered_trademark( $atts ){
 }
 
 /**
+ * Retrieve trademark symbol (™)
  * 
- * Retrieve ™ symbol
- * 
+ * @param array $atts Shortcode attributes (not used)
+ * @return string The trademark symbol, escaped for safe output
  */
 add_shortcode( 'tm', 'cys_trademark' );
 function cys_trademark( $atts ){
@@ -33,9 +35,10 @@ function cys_trademark( $atts ){
 }
 
 /**
+ * Retrieve service mark symbol (℠)
  * 
- * Retrieve ℠ symbol
- * 
+ * @param array $atts Shortcode attributes (not used)
+ * @return string The service mark symbol, escaped for safe output
  */
 add_shortcode( 'sm', 'cys_servicemark_trademark' );
 function cys_servicemark_trademark( $atts ){
