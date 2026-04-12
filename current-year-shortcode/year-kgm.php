@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Current Year, Symbols and IP Shortcode
- * Version: 2.4.1
+ * Version: 2.5
  * Description: Get current year, symbols and IP with shortcode.
  * Author: KGM Servizi
  * Author URI: https://kgmservizi.com
@@ -10,10 +10,10 @@
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-  exit; // Exit if accessed directly
+	exit; // Exit if accessed directly
 }
 
-require_once( plugin_dir_path( __FILE__ ) . 'shortcodes/ip.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'shortcodes/dates.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'shortcodes/symbols.php' );
-require_once( plugin_dir_path( __FILE__ ) . 'shortcodes/copyright.php' );
+require_once plugin_dir_path( __FILE__ ) . 'shortcodes/ip.php';
+require_once plugin_dir_path( __FILE__ ) . 'shortcodes/dates.php';
+require_once plugin_dir_path( __FILE__ ) . 'shortcodes/symbols.php';
+require_once plugin_dir_path( __FILE__ ) . 'shortcodes/copyright.php';

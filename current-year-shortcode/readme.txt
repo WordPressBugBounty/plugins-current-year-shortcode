@@ -5,7 +5,7 @@ Tags: current year shortcode, copyright shortcode, copyright symbol, trademark s
 Requires at least: 2.5
 Tested up to: 6.8
 Requires PHP: 5.6
-Stable tag: 2.4.1
+Stable tag: 2.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,30 +22,30 @@ Current year, copyright, symbols and user IP with shortcode.
 
 Current year, copyright, symbols and user IP with shortcode.
 
-[y] display current year **2020**
-[m] display current month **October**
-[d] display current day **25**
-[dmy] display current date **01/01/2023**
+[y] display current year **2026**
+[m] display current month **April**
+[d] display current day **12**
+[dmy] display current date **12/04/2026**
 [c] display copyright symbol **©**
 [t] display registered trademark symbol **®**
 [tm] display unregistered trademark symbol **™**
 [sm] display service mark symbol **℠**
 [cc] display **Copyright**
-[cy] display symbol of copyright and current year **©2019**
-[cyy year="2003"] display symbol of copyright, first year, current year **©2003-2019**
-[cyyl year="2003"] display copyright, first year, current year **Copyright 2003-2019**
-[cyyls year="2003"] display copyright (+©), first year, current year **©Copyright 2003-2019**
+[cy] display symbol of copyright and current year **© 2026**
+[cyy year="2003"] display symbol of copyright, first year, current year **© 2003-2026**
+[cyyl year="2003"] display copyright, first year, current year **Copyright 2003-2026**
+[cyyls year="2003"] display copyright (+©), first year, current year **© Copyright 2003-2026**
 [show_user_ip] display ip of current user
 
 **Useful attribute for extend shortcode functionality**
 
 **Format Attribute for Year**
-For shortcode with year you can choose format with attribute format="". It support "Y" (es.2019) or "y" (es.19). Default format without attribute is "Y".
+For shortcode with year you can choose format with attribute format="". It support "Y" (es.2026) or "y" (es.26). Default format without attribute is "Y".
 *You must enter year attribute in the same format.*
 
 **Example**
-[cyy year="03" format="y"] **©03-19**
-[cyy year="2003" format="Y"] **©2003-2019**
+[cyy year="03" format="y"] **© 03-26**
+[cyy year="2003" format="Y"] **© 2003-2026**
 
 **Format Attribute for Month**
 For shortcode with month you can choose format with attribute format="". It support "F" - "m" - "M" - "n".
@@ -60,13 +60,13 @@ All php date function attributes.
 For day shortcode [d] you can add offset with attribute offset="". It support + or -.
 For month shortcode [m] you can add offset with attribute offset="". It support + or -.
 For year shortcode [y] you can add offset with attribute offset="". It support + or -.
-For current date shortcode [dmy] you can add offset with attribute offset="". It support + or - in standard php date format, for ex. + 1 year or - 1 day.
+For current date shortcode [dmy] you can add offset with attribute offset="". It support + or - in standard php date format, for ex. +1 year or -1 day.
 
 **Example**
-[d offset="+1"] **2023**
-[m offset="+1"] **2** (if current month is January)
-[y offset="+1"] **2** (if current day is 1)
-[dmy offset="+ 1 year"] **01/01/2023**
+[d offset="+1"] **13** (if current day is 12)
+[m offset="+1"] **May** (if current month is April)
+[y offset="+1"] **2027** (if current year is 2026)
+[dmy offset="+1 year"] **12/04/2027**
 
 
 
@@ -85,19 +85,19 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 = What are the available shortcodes? =
 
-[y] display current year **2020**
-[m] display current month **October**
-[d] display current day **25**
-[dmy] display current date **01/01/2023**
+[y] display current year **2026**
+[m] display current month **April**
+[d] display current day **12**
+[dmy] display current date **12/04/2026**
 [c] display copyright symbol **©**
 [t] display registered trademark symbol **®**
 [tm] display unregistered trademark symbol **™**
 [sm] display service mark symbol **℠**
 [cc] display **Copyright**
-[cy] display symbol of copyright and current year **©2019**
-[cyy year="2003"] display symbol of copyright, first year, current year **©2003-2019**
-[cyyl year="2003"] display copyright, first year, current year **Copyright 2003-2019**
-[cyyls year="2003"] display copyright (+©), first year, current year **©Copyright 2003-2019**
+[cy] display symbol of copyright and current year **© 2026**
+[cyy year="2003"] display symbol of copyright, first year, current year **© 2003-2026**
+[cyyl year="2003"] display copyright, first year, current year **Copyright 2003-2026**
+[cyyls year="2003"] display copyright (+©), first year, current year **© Copyright 2003-2026**
 [show_user_ip] display ip of current user
 
 **Full list here:** [Documentation](http://uskgm.it/cysdoc "Documentation")
@@ -120,12 +120,12 @@ With IP shortcode you can retrieve your user IP.
 
 = How work year format attribute? =
 
-For shortcode with year you can choose format with attribute format="". It support "Y" (es.2019) or "y" (es.19). Default format without attribute is "Y".
+For shortcode with year you can choose format with attribute format="". It support "Y" (es.2026) or "y" (es.26). Default format without attribute is "Y".
 *You must enter year attribute in the same format.*
 
 **Example**
-[cyy year="03" format="y"] **©03-19**
-[cyy year="2003" format="Y"] **©2003-2019**
+[cyy year="03" format="y"] **© 03-26**
+[cyy year="2003" format="Y"] **© 2003-2026**
 
 = How work month format attribute? =
 
@@ -140,13 +140,13 @@ For shortcode with day you can choose format with attribute format="". It suppor
 For day shortcode [d] you can add offset with attribute offset="". It support + or -.
 For month shortcode [m] you can add offset with attribute offset="". It support + or -.
 For year shortcode [y] you can add offset with attribute offset="". It support + or -.
-For current date shortcode [dmy] you can add offset with attribute offset="". It support + or - in standard php date format, for ex. +1year or -1day.
+For current date shortcode [dmy] you can add offset with attribute offset="". It support + or - in standard php date format, for ex. +1 year or -1 day.
 
 **Example**
-[d offset="+1"] **2023**
-[m offset="+1"] **2** (if current month is January)
-[y offset="+1"] **2** (if current day is 1)
-[dmy offset="+ 1 year"] **01/01/2023**
+[d offset="+1"] **13** (if current day is 12)
+[m offset="+1"] **May** (if current month is April)
+[y offset="+1"] **2027** (if current year is 2026)
+[dmy offset="+1 year"] **12/04/2027**
 
 
 == Screenshots ==
@@ -159,6 +159,18 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 
 == Changelog ==
+
+= 2.5 =
+* Improved accessibility: symbols and copyright shortcodes now include aria-label for screen readers.
+* Security: improved input sanitization and output escaping across all shortcodes.
+* Fixed offset bug with negative values (e.g. [y offset="-3"]).
+* Fixed loose type comparison in copyright year range shortcodes.
+* Removed duplicate validation code, consolidated into shared functions.
+* Optimized date function calls for better performance.
+* Renamed internal filter hook from wpb_get_ip to cys_get_ip (old hook still works with deprecation notice).
+* Fixed function prefix inconsistency (csy_ renamed to cys_).
+* Code formatting aligned to WordPress Coding Standards.
+* Error messages now include role="alert" for accessibility.
 
 = 2.4.1 =
 * Bugfix.
@@ -255,6 +267,9 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 
 == Upgrade Notice ==
+
+= 2.5 =
+Security and accessibility improvements. Fixed negative offset bug. If you use the wpb_get_ip filter hook, please update to cys_get_ip (old hook still works for now).
 
 = 2.4.1 =
 Bugfix.
