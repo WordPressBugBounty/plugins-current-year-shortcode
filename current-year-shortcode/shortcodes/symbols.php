@@ -6,41 +6,40 @@
  * Author: KGM Servizi
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ *
+ * @package Current_Year_Shortcode
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 /**
- * Retrieve registered trademark symbol (®)
+ * Retrieve registered trademark symbol.
  *
- * @param array $atts Shortcode attributes (not used)
- * @return string The registered trademark symbol, escaped for safe output
+ * @return string The registered trademark symbol, escaped for safe output.
  */
-add_shortcode( 't', 'cys_registered_trademark' );
-function cys_registered_trademark( $atts ) {
+function cys_registered_trademark() {
 	return '<abbr aria-label="' . esc_attr( 'Registered trademark' ) . '">®</abbr>';
 }
+add_shortcode( 't', 'cys_registered_trademark' );
 
 /**
- * Retrieve trademark symbol (™)
+ * Retrieve trademark symbol.
  *
- * @param array $atts Shortcode attributes (not used)
- * @return string The trademark symbol, escaped for safe output
+ * @return string The trademark symbol, escaped for safe output.
  */
-add_shortcode( 'tm', 'cys_trademark' );
-function cys_trademark( $atts ) {
+function cys_trademark() {
 	return '<abbr aria-label="' . esc_attr( 'Trademark' ) . '">™</abbr>';
 }
+add_shortcode( 'tm', 'cys_trademark' );
 
 /**
- * Retrieve service mark symbol (℠)
+ * Retrieve service mark symbol.
  *
- * @param array $atts Shortcode attributes (not used)
- * @return string The service mark symbol, escaped for safe output
+ * @return string The service mark symbol, escaped for safe output.
  */
-add_shortcode( 'sm', 'cys_servicemark_trademark' );
-function cys_servicemark_trademark( $atts ) {
+function cys_servicemark_trademark() {
 	return '<abbr aria-label="' . esc_attr( 'Service mark' ) . '">℠</abbr>';
 }
+add_shortcode( 'sm', 'cys_servicemark_trademark' );

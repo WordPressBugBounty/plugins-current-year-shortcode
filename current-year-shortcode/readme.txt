@@ -3,9 +3,9 @@ Contributors: kgmservizi
 Donate link: https://kgmservizi.com
 Tags: current year shortcode, copyright shortcode, copyright symbol, trademark shortcode, symbol shortcode
 Requires at least: 2.5
-Tested up to: 6.8
+Tested up to: 7.0
 Requires PHP: 5.6
-Stable tag: 2.5
+Stable tag: 2.6
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -17,8 +17,6 @@ Current year, copyright, symbols and user IP with shortcode.
 **Don't work? Open ticket, we answer in max 48h.**
 
 **How shortcode work:** [WordPress Codex](https://codex.wordpress.org/Shortcode "WordPress Codex")
-
-**Full documentation and shortcode list:** [Documentation](http://uskgm.it/cysdoc "Documentation")
 
 Current year, copyright, symbols and user IP with shortcode.
 
@@ -50,23 +48,50 @@ For shortcode with year you can choose format with attribute format="". It suppo
 **Format Attribute for Month**
 For shortcode with month you can choose format with attribute format="". It support "F" - "m" - "M" - "n".
 
+"F" full name (April)
+"M" short name (Apr)
+"m" number with leading zero (04)
+"n" number without leading zero (4)
+
 **Format Attribute for Day**
-For shortcode with day you can choose format with attribute format="". It support "D" - "d" - "j" - "N"
+For shortcode with day you can choose format with attribute format="". It support "d" - "D" - "j" - "N" - "S" - "w" - "z" - "t".
+
+"d" number with leading zero (05)
+"j" number without leading zero (5)
+"D" short day name (Mon)
+"S" ordinal suffix, to put after "j" (st, nd, rd, th)
+"N" day of the week, 1 for Monday to 7 for Sunday
+"w" day of the week, 0 for Sunday to 6 for Saturday
+"z" day of the year (0 to 365)
+"t" number of days in the current month
 
 **Format Attribute for current date**
-All php date function attributes.
+For [dmy] you can use the letters of the php date function, plus space and - / . , : ; characters.
+Escaped literal characters (the ones with a backslash) are not supported.
+
+**Example**
+[dmy format="d/m/Y"] **12/04/2026**
+[dmy format="j F Y"] **12 April 2026**
+[dmy format="Y-m-d"] **2026-04-12**
+[dmy format="l"] **Sunday**
+[dmy format="H:i"] **18:30**
+
+Month and day names come out in the language of your site.
 
 **Offset Attribute**
-For day shortcode [d] you can add offset with attribute offset="". It support + or -.
-For month shortcode [m] you can add offset with attribute offset="". It support + or -.
-For year shortcode [y] you can add offset with attribute offset="". It support + or -.
-For current date shortcode [dmy] you can add offset with attribute offset="". It support + or - in standard php date format, for ex. +1 year or -1 day.
+For [y], [m] and [d] the offset is a plain number with + or -, from -1000 to 1000.
+For [dmy] the number needs a unit after it: years, months, weeks, days, hours, minutes, seconds. Also "today", "yesterday" and "tomorrow" work.
 
 **Example**
 [d offset="+1"] **13** (if current day is 12)
 [m offset="+1"] **May** (if current month is April)
 [y offset="+1"] **2027** (if current year is 2026)
+[y offset="-3"] **2023** (if current year is 2026)
 [dmy offset="+1 year"] **12/04/2027**
+[dmy offset="-2 months"] **12/02/2026**
+[dmy offset="tomorrow"] **13/04/2026**
+
+Offsets follow the timezone of your site, the one in Settings > General.
 
 
 
@@ -100,7 +125,7 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 [cyyls year="2003"] display copyright (+©), first year, current year **© Copyright 2003-2026**
 [show_user_ip] display ip of current user
 
-**Full list here:** [Documentation](http://uskgm.it/cysdoc "Documentation")
+The complete list of format letters and offsets is in the Description tab.
 
 = What are the symbols shortcode? =
 
@@ -118,6 +143,21 @@ For more symbols shortcode write a support ticket!
 
 With IP shortcode you can retrieve your user IP.
 
+= I use a CDN and [show_user_ip] shows the wrong address =
+
+The shortcode reads a forwarded header only when the request reaches your site through a proxy it recognises. Local reverse proxies and Cloudflare are already in the list. For any other CDN, add its ranges:
+
+`add_filter( 'cys_trusted_proxies', function ( $proxies ) {
+	$proxies[] = '203.0.113.0/24';
+	return $proxies;
+} );`
+
+Ask your host or your CDN which ranges to use. Getting it wrong breaks nothing, the shortcode simply falls back to the address of whoever opened the connection.
+
+= Why is the page with [show_user_ip] not cached? =
+
+Because that shortcode prints something different for every visitor, so the page has to be built on each request. If you also cache at the edge, exclude the page there as well.
+
 = How work year format attribute? =
 
 For shortcode with year you can choose format with attribute format="". It support "Y" (es.2026) or "y" (es.26). Default format without attribute is "Y".
@@ -133,20 +173,20 @@ For shortcode with month you can choose format with attribute format="". It supp
 
 = How work day format attribute? =
 
-For shortcode with day you can choose format with attribute format="". It support "D" - "d" - "j" - "N"
+For shortcode with day you can choose format with attribute format="". It support "d" - "D" - "j" - "N" - "S" - "w" - "z" - "t". The full list with the meaning of each letter is in the Description tab.
 
 = How work year, month and day offset attribute? =
 
-For day shortcode [d] you can add offset with attribute offset="". It support + or -.
-For month shortcode [m] you can add offset with attribute offset="". It support + or -.
-For year shortcode [y] you can add offset with attribute offset="". It support + or -.
-For current date shortcode [dmy] you can add offset with attribute offset="". It support + or - in standard php date format, for ex. +1 year or -1 day.
+For [y], [m] and [d] the offset is a plain number with + or -, from -1000 to 1000.
+For [dmy] the number needs a unit after it: years, months, weeks, days, hours, minutes, seconds. Also "today", "yesterday" and "tomorrow" work.
+Offsets follow the timezone of your site, the one in Settings > General.
 
 **Example**
 [d offset="+1"] **13** (if current day is 12)
 [m offset="+1"] **May** (if current month is April)
 [y offset="+1"] **2027** (if current year is 2026)
 [dmy offset="+1 year"] **12/04/2027**
+[dmy offset="tomorrow"] **13/04/2026**
 
 
 == Screenshots ==
@@ -159,6 +199,15 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 
 == Changelog ==
+
+= 2.6 =
+* Offsets now follow the timezone set in your WordPress settings, on dates and on times.
+* More consistent handling of the year format: [cyy] and friends with format="y" show a single year when there is nothing to range, same as format="Y" already did.
+* Stricter check on the year attribute.
+* [show_user_ip] reads forwarded headers only when the request comes through a known proxy. Local reverse proxies and Cloudflare work out of the box, other CDNs can be added with a filter, see the FAQ.
+* Pages using [show_user_ip] are kept out of full page caching.
+* Code revision on the date and copyright shortcodes.
+* Tested with WordPress 7.0.
 
 = 2.5 =
 * Improved accessibility: symbols and copyright shortcodes now include aria-label for screen readers.
@@ -268,6 +317,9 @@ For current date shortcode [dmy] you can add offset with attribute offset="". It
 
 == Upgrade Notice ==
 
+= 2.6 =
+Offsets now follow your site timezone. If your site sits behind a CDN other than Cloudflare, add it with the cys_trusted_proxies filter, otherwise [show_user_ip] shows the address of the CDN instead of the one of your visitor. See the FAQ.
+
 = 2.5 =
 Security and accessibility improvements. Fixed negative offset bug. If you use the wpb_get_ip filter hook, please update to cys_get_ip (old hook still works for now).
 
@@ -363,5 +415,3 @@ Added more shortcode (copyright, trademark, copyright + year of creation + curre
 
 = 0.1 =
 Initial release.
-
-`<?php code(); // goes in backticks ?>`
